@@ -1,13 +1,11 @@
-from random import uniform, choice
-
+from random import uniform, choice, shuffle
 class Node:
     def __init__(self, elements):
 
         self.elements = elements        # [(x,y), (x,y),....]
 
-
-        self.l_border = min(elements, key=lambda x: x[0])[0] - 0.0000001
-        self.r_border = max(elements, key=lambda x: x[0])[0] + 0.0000001
+        self.l_border = min(elements, key=lambda x: x[0])[0]
+        self.r_border = max(elements, key=lambda x: x[0])[0]
         self.b_border = min(elements, key=lambda x: x[1])[1] - 0.0000001
         self.t_border = max(elements, key=lambda x: x[1])[1] + 0.0000001
 
@@ -15,10 +13,9 @@ class Node:
     def spliting(self):
         x = choice([0,1])
         if x == 1:
-        # if self._get_longest_side() == 'x':
             return self._splite_x()
         else:
-            if (len(self.elements) >= 2) and (self.elements[0][1] == self.elements[1][1]):
+            if (self.elements[0][1] == self.elements[1][1]):
                 return self._splite_x()
             else:
                 return self._splite_y()
@@ -54,26 +51,18 @@ class Node:
 
         return Node(bot_elem), Node(top_elem)
 
-    # def _get_longest_side(self):
-    #     return 'x' if (abs(self.l_border) + abs(self.r_border)) > (abs(self.b_border) + abs(self.t_border)) else 'y'
-
-    def sampling(self, sampling_ratio=0.8):
+    def sampling(self, sampling_ratio=0.6):
         """
-
-        input_ints(list) - list of total input numbers
+        ***IN PLACE
         sampling_ratio(int) - how many numbers enter in total sampling
-
-        :return list with sampling element
         """
-        from random import shuffle
-
         sampling_elem_count = round(len(self.elements) * sampling_ratio)
         input_ints = self.elements.copy()
         shuffle(input_ints)
 
         self.elements = sorted(input_ints[:sampling_elem_count], key=lambda x: x[0])
-        self.l_border = min(self.elements, key=lambda x: x[0])[0] - 0.0000001
-        self.r_border = max(self.elements, key=lambda x: x[0])[0] + 0.0000001
+        self.l_border = min(self.elements, key=lambda x: x[0])[0]
+        self.r_border = max(self.elements, key=lambda x: x[0])[0]
         self.b_border = min(self.elements, key=lambda x: x[1])[1] - 0.0000001
         self.t_border = min(self.elements, key=lambda x: x[1])[1] + 0.0000001
 
@@ -81,8 +70,6 @@ class Node:
     def show_node(self):
         return self.elements
 
-    def __str__(self):
-        return '{}'.format(self.elements)
 
 
 

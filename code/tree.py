@@ -2,7 +2,7 @@ import anytree
 from code.node import Node as MyNode
 
 class Tree:
-    def __init__(self, data_list, max_depth = 130):
+    def __init__(self, data_list, max_depth = 50):
         """
         datalist - [(x,y), (x,y), ...]
         """
