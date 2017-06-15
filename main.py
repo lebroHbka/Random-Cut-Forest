@@ -4,7 +4,7 @@ import datetime as dt
 from code.random_cut_forest import RandomCutForest
 import numpy as np
 import math
-
+import time
 
 def open_csv():
     x1 = []
@@ -21,11 +21,13 @@ def open_csv():
 
 x, y, data = open_csv()
 
-
-r = RandomCutForest(data)
+q = time.time()
+r = RandomCutForest(data, sensitive=1)
+r.start()
+print(time.time() - q)
 a = []
 b = []
-for i in r.get_result:
+for i in r.get_result():
     a += [i[0]]
     b += [i[1]]
 
@@ -50,4 +52,21 @@ plt.show()
 
 
 
+
+
+# ---------------------- debuging ----------------------
+# data = [(0,1),
+#         (1,2),
+#         (2,-2),
+#         (3,5),
+#         (4,10),
+#         (5,-12),
+#         (6,7),
+#         (7,20),
+#         (8,1),
+#         (9,2)]
+#
+# r = RandomCutForest(data, sensitive=1)
+# r.start()
+# r.get_result()
 
