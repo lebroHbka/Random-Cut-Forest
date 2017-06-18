@@ -14,11 +14,11 @@ class TestNode(unittest.TestCase):
         self.assertEqual(self.x3._get_longest_side(), 'y')
 
     def test_spliting(self):
-        a, b = self.x1.make_2nodes_from_split()
+        a, b = self.x1.generate_2nodes_from_split()
         self.assertEqual(len(a.elements) + len(b.elements), len(self.x1.elements))
-        a, b = self.x2.make_2nodes_from_split()
+        a, b = self.x2.generate_2nodes_from_split()
         self.assertEqual(len(a.elements) + len(b.elements), len(self.x2.elements))
-        a, b = self.x3.make_2nodes_from_split()
+        a, b = self.x3.generate_2nodes_from_split()
         self.assertEqual(len(a.elements) + len(b.elements), len(self.x3.elements))
 
 
